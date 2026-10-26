@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinearCMD Benchmark Payload & Stress Test Suite v1.0</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --text: #c9d1d9;
+            --success: #3fb950;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background: var(--bg); color: var(--text); padding: 2rem; display: flex; flex-direction: column; gap: 2rem; }
+        header { border-bottom: 1px solid var(--border); padding-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; }
+        h1 { color: #fff; font-size: 1.8rem; }
+        .badge { background: var(--accent); color: #000; padding: 0.2rem 0.6rem; border-radius: 12px; font-weight: bold; font-size: 0.8rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 8px; padding: 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+        .card h3 { color: #fff; font-size: 1.2rem; }
+        pre { background: #000; padding: 1rem; border-radius: 6px; overflow-x: auto; color: var(--success); font-family: monospace; font-size: 0.9rem; }
+        .svg-container { width: 100%; height: 180px; background: #000; border-radius: 6px; overflow: hidden; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { border: 1px solid var(--border); padding: 0.5rem; text-align: left; font-size: 0.85rem; }
+        th { background: #21262d; color: #fff; }
+        .btn { background: #238636; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn:hover { background: #2ea043; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <h1>🚀 LinearCMD Stress Test Payload</h1>
+            <p>Generated for file-size, parsing, staging, and git push performance benchmarking.</p>
+        </div>
+        <span class="badge">Payload Size: Heavy</span>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h3>⚡ Performance Vector Graphic</h3>
+            <div class="svg-container">
+                <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#58a6ff;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#bc8cff;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <rect width="100%" height="100%" fill="url(#grad1)" opacity="0.1" />
+                    <circle cx="50%" cy="50%" r="40" stroke="#58a6ff" stroke-width="4" fill="none" />
+                    <path d="M 10 80 Q 52.5 10, 95 80 T 180 80" stroke="#bc8cff" fill="transparent" stroke-width="3" />
+                </svg>
+            </div>
+            <button class="btn" onclick="runBenchmark()">Run In-Browser Engine Test</button>
+        </div>
+
+        <div class="card">
+            <h3>📊 Synthetic Execution Log</h3>
+            <pre id="log">
+[0.000ms] Initializing LinearCMD engine...
+[0.002ms] Loading remote target origin...
+[0.004ms] Staging payload buffer...
+[0.008ms] Commit finalized cleanly!
+            </pre>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>📋 Generated Data Matrix (50 Rows)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Hash Vector</th>
+                    <th>Status</th>
+                    <th>Execution Speed</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+                <!-- Javascript will inject 50 heavy data rows -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Generate mock data rows to add DOM weight
+        const tbody = document.getElementById('table-body');
+        let htmlBuffer = '';
+        for (let i = 1; i <= 50; i++) {
+            const randomHash = Array.from({length: 32}, () => Math.floor(Math.random()*16).toString(16)).join('');
+            htmlBuffer += `
+                <tr>
+                    <td>#${i.toString().padStart(4, '0')}</td>
+                    <td><code>${randomHash}</code></td>
+                    <td><span style="color: var(--success);">SUCCESS</span></td>
+                    <td>${(Math.random() * 5 + 3).toFixed(3)} ms</td>
+                </tr>
+            `;
+        }
+        tbody.innerHTML = htmlBuffer;
+
+        function runBenchmark() {
+            const start = performance.now();
+            for (let i = 0; i < 100000; i++) { Math.sqrt(i); }
+            const duration = performance.now() - start;
+            document.getElementById('log').innerText += `\n[Client JS Test] Computed 100k sqrt operations in ${duration.toFixed(3)} ms`;
+        }
+    </script>
+</body>
+</html>
